@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(writing-plans)",
+      "Bash(flutter --version:*)",
+      "Bash(/mnt/c/flutter/bin/flutter:*)",
+      "Bash(cmd.exe /c \"flutter --version\")",
+      "Bash(cmd.exe /c \"cd /d C:\\\\Users\\\\Toms\\\\StudioProjects\\\\notionmini && flutter create --org com.notionmini --project-name notionmini .\":*)",
+      "Bash(cmd.exe /c:*)",
+      "Bash(flutter analyze:*)",
+      "Skill(brainstorming)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(md5sum:*)",
+      "Skill(executing-plans)",
+      "Bash(flutter pub get:*)",
+      "Bash(flutter.bat pub get:*)",
+      "Bash(xargs basename:*)",
+      "WebSearch",
+      "WebFetch(domain:pub.dev)",
+      "WebFetch(domain:docs.page)",
+      "Skill(subagent-driven-development)",
+      "Bash(flutter build:*)",
+      "Skill(superpowers:executing-plans)",
+      "Skill(superpowers:systematic-debugging)"
+    ]
+  }
+}

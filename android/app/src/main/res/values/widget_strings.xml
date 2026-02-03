@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="habit_widget_description">Track your daily habits</string>
+    <string name="checklist_widget_description">Quick checklist access</string>
+    <string name="progress_widget_description">Track your progress goals</string>
+</resources>
