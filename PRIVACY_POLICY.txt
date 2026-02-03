@@ -36,18 +36,14 @@ We do not collect:
 
 LilyNotes does not integrate with any third-party analytics, advertising, or tracking services.
 
-5. HOME SCREEN WIDGETS
-
-The app provides home screen widgets that display your data (checklists, habits, progress). This data remains stored locally on your device and is not transmitted anywhere.
-
-6. DATA SECURITY
+5. DATA SECURITY
 
 Since all data is stored locally on your device, the security of your data depends on your device's security settings. We recommend:
 - Using device lock (PIN, password, or biometric)
 - Keeping your device software updated
 - Not sharing your device with untrusted parties
 
-7. DATA DELETION
+6. DATA DELETION
 
 You can delete your data at any time by:
 - Deleting individual items within the app
@@ -56,19 +52,19 @@ You can delete your data at any time by:
 
 When you uninstall the app, all locally stored data is permanently deleted.
 
-8. CHILDREN'S PRIVACY
+7. CHILDREN'S PRIVACY
 
 LilyNotes does not knowingly collect any information from children. The app is suitable for users of all ages as it does not collect personal data.
 
-9. CHANGES TO THIS PRIVACY POLICY
+8. CHANGES TO THIS PRIVACY POLICY
 
 We may update this privacy policy from time to time. Any changes will be reflected in the "Last updated" date at the top of this policy.
 
-10. CONTACT
+9. CONTACT
 
 If you have any questions about this privacy policy, please contact us through the GitHub repository:
 https://github.com/TOMSLAUS/lilynotes
 
-11. CONSENT
+10. CONSENT
 
 By using LilyNotes, you consent to this privacy policy.

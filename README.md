@@ -15,20 +15,11 @@ A widget-based note-taking app built with Flutter. Organize your thoughts, track
 - **Bookmarks** - Save and organize links
 - **Dividers** - Visual separators for organization
 
-## Home Screen Widgets
-
-LilyNotes supports native home screen widgets for both Android and iOS:
-- Checklist Widget
-- Habit Tracker Widget
-- Progress Widget
-
 ## Tech Stack
 
 - Flutter 3.9+
 - Hive for local storage
 - Provider for state management
-- Jetpack Glance for Android widgets
-- WidgetKit for iOS widgets
 
 ## Getting Started
 
