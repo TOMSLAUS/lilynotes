@@ -1,0 +1,61 @@
+SHORT DESCRIPTION (max 80 characters):
+Organize your life with customizable widgets - notes, habits, tasks, and more.
+
+================================================================================
+
+FULL DESCRIPTION:
+
+LilyNotes is a flexible note-taking app that lets you build personalized pages using a variety of widgets. Whether you want to track habits, manage tasks, monitor progress, or simply jot down notes, LilyNotes adapts to your needs.
+
+WIDGETS FOR EVERY PURPOSE
+
+Text Blocks
+Write notes, ideas, and descriptions with rich text formatting.
+
+Checklists
+Create task lists and check off items as you complete them. Perfect for shopping lists, to-do lists, and daily tasks.
+
+Habit Tracker
+Build better habits by tracking your daily routines. See your progress at a glance and stay motivated.
+
+Progress Bars
+Set goals and monitor your progress visually. Great for projects, savings goals, or any milestone you want to reach.
+
+Timers
+Countdown timers and stopwatch functionality for workouts, cooking, study sessions, or any timed activity.
+
+Score and Counter
+Keep track of scores, counts, or any number you need to monitor.
+
+Counter Lists
+Multiple named counters in one widget. Track inventory, points, or anything that needs counting.
+
+Expense Tracker
+Log expenses and keep track of your spending by category.
+
+Bookmarks
+Save and organize your favorite links in one place.
+
+Dividers
+Organize your pages with visual separators.
+
+WHY LILYNOTES?
+
+- Privacy First: All your data stays on your device. No accounts, no cloud sync, no tracking.
+- Offline: Works completely offline. Your notes are always accessible.
+- Customizable: Build pages that work for you by combining different widgets.
+- Simple: Clean, intuitive interface that gets out of your way.
+- Free: No ads, no in-app purchases, no premium features locked behind a paywall.
+
+PERFECT FOR
+
+- Daily planning and to-do lists
+- Habit building and tracking
+- Goal setting and progress monitoring
+- Quick notes and ideas
+- Shopping and inventory lists
+- Time management
+- Personal finance tracking
+- Bookmark organization
+
+Download LilyNotes and start organizing your life your way.
