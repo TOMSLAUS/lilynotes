@@ -29,7 +29,6 @@ class WidgetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Text blocks: completely seamless, no decoration
     if (widget.type == WidgetType.text) {
       return TextBlockWidget(
         widget: widget,
@@ -39,7 +38,6 @@ class WidgetCard extends StatelessWidget {
       );
     }
 
-    // Divider: render inline, no container
     if (widget.type == WidgetType.divider) {
       return _InlineWidget(
         onDelete: onDelete,
@@ -51,7 +49,6 @@ class WidgetCard extends StatelessWidget {
       );
     }
 
-    // All other widgets: subtle embedded container
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     return _InlineWidget(
@@ -71,7 +68,6 @@ class WidgetCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Action icons, right-aligned
             Align(
               alignment: Alignment.centerRight,
               child: Row(
@@ -215,7 +211,6 @@ class WidgetCard extends StatelessWidget {
   }
 }
 
-/// Wraps an inline widget with long-press-to-delete gesture.
 class _InlineWidget extends StatelessWidget {
   final VoidCallback onDelete;
   final Widget child;

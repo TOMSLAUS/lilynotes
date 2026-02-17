@@ -26,10 +26,6 @@ class StorageService {
     _initialized = true;
   }
 
-  // ---------------------------------------------------------------------------
-  // Helpers
-  // ---------------------------------------------------------------------------
-
   Map<String, dynamic> _safeMap(Map? raw) {
     if (raw == null) return {};
     try {
@@ -44,10 +40,6 @@ class StorageService {
     if (value is num) return value.toInt();
     return fallback;
   }
-
-  // ---------------------------------------------------------------------------
-  // Pages
-  // ---------------------------------------------------------------------------
 
   Future<List<Map<String, dynamic>>> getAllPages() async {
     try {
@@ -75,9 +67,7 @@ class StorageService {
   Future<void> savePage(Map<String, dynamic> page) async {
     try {
       await _pages.put(page['id'] as String, page);
-    } catch (_) {
-      // silently fail — data will be stale but app won't crash
-    }
+    } catch (_) {}
   }
 
   Future<void> deletePage(String id) async {
@@ -106,10 +96,6 @@ class StorageService {
       }
     } catch (_) {}
   }
-
-  // ---------------------------------------------------------------------------
-  // Widgets
-  // ---------------------------------------------------------------------------
 
   Future<Map<String, dynamic>?> getWidget(String id) async {
     try {
@@ -182,10 +168,6 @@ class StorageService {
       }
     } catch (_) {}
   }
-
-  // ---------------------------------------------------------------------------
-  // Settings
-  // ---------------------------------------------------------------------------
 
   Future<String> getThemeMode() async {
     try {

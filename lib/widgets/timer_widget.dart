@@ -28,13 +28,11 @@ class _TimerWidgetState extends State<TimerWidget> with WidgetLogMixin<TimerWidg
   Timer? _ticker;
   bool _running = false;
 
-  // Stopwatch state
   int _elapsedMs = 0;
   List<int> _laps = [];
 
-  // Timer (countdown) state
   int _remainingMs = 0;
-  int _durationMs = 60000; // default 1 min
+  int _durationMs = 60000;
 
   bool get _isTimer => (widget.widget.data['mode'] as String?) == 'timer';
 

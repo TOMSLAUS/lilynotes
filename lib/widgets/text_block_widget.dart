@@ -72,7 +72,6 @@ class _TextBlockWidgetState extends State<TextBlockWidget> {
         onChanged: _onChanged,
       );
     }
-    // Fill the screen: use expands inside a sized box
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: TextField(

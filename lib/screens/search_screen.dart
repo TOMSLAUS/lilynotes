@@ -61,14 +61,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   String _snippet(SearchResult result, String query) {
     final data = result.widget.data;
-    // Try content field first
     if (data['content'] is String) {
       final content = data['content'] as String;
       if (content.toLowerCase().contains(query.toLowerCase())) {
         return _extractSnippet(content, query);
       }
     }
-    // Try items
     if (data['items'] is List) {
       for (final item in data['items'] as List) {
         if (item is Map) {
@@ -80,7 +78,6 @@ class _SearchScreenState extends State<SearchScreen> {
         }
       }
     }
-    // Try score options
     if (data['options'] is List) {
       for (final option in data['options'] as List) {
         if (option is Map && option['text'] is String) {
@@ -91,7 +88,6 @@ class _SearchScreenState extends State<SearchScreen> {
         }
       }
     }
-    // Fallback to title
     return result.widget.title;
   }
 

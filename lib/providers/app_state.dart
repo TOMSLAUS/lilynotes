@@ -3,8 +3,6 @@ import '../models/app_page.dart';
 import '../models/app_widget.dart';
 import '../models/widget_type.dart';
 import '../services/storage_service.dart';
-import '../services/widget_bridge_service.dart';
-
 class SearchResult {
   final AppWidget widget;
   final String pageName;
@@ -158,7 +156,6 @@ class AppState extends ChangeNotifier {
     final newIds = <String>[...currentPage!.widgetIds, widget.id];
     _currentWidgets.add(widget);
 
-    // For non-text widgets, add a text block after so the user can keep typing
     if (type != WidgetType.text) {
       final textBlock = AppWidget(
         type: WidgetType.text,
@@ -196,7 +193,6 @@ class AppState extends ChangeNotifier {
 
     _currentWidgets.removeWhere((w) => w.id == widgetId);
 
-    // Merge adjacent text blocks that were separated by the deleted widget
     await _mergeAdjacentTextBlocks();
 
     final page = currentPage!;
@@ -208,7 +204,6 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Merges consecutive text blocks into one, preserving content with newlines.
   Future<void> _mergeAdjacentTextBlocks() async {
     if (_currentPageId == null) return;
     var i = 0;
@@ -226,10 +221,8 @@ class AppState extends ChangeNotifier {
         final updated = current.copyWith(data: {...current.data, 'content': merged});
         _currentWidgets[i] = updated;
         await _storage.saveWidget(updated.toMap());
-        // Remove the second text block
         _currentWidgets.removeAt(i + 1);
         await _storage.deleteWidget(next.id, _currentPageId!);
-        // Don't increment i — check again in case there's another adjacent text block
       } else {
         i++;
       }
@@ -281,13 +274,11 @@ class AppState extends ChangeNotifier {
     if (widget.title.toLowerCase().contains(query)) return true;
 
     final data = widget.data;
-    // Search in text block content
     if (data['content'] is String &&
         (data['content'] as String).toLowerCase().contains(query)) {
       return true;
     }
 
-    // Search in list-based items
     if (data['items'] is List) {
       for (final item in data['items'] as List) {
         if (item is Map) {
@@ -300,7 +291,6 @@ class AppState extends ChangeNotifier {
       }
     }
 
-    // Search in score options
     if (data['options'] is List) {
       for (final option in data['options'] as List) {
         if (option is Map && option['text'] is String &&

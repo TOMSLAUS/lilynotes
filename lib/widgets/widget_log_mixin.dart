@@ -5,17 +5,10 @@ import '../models/app_widget.dart';
 const _maxLogEntries = 50;
 final _logTimeFmt = DateFormat('MMM d, HH:mm');
 
-/// Mixin that gives any widget State logging capabilities.
-///
-/// The host State must provide [logWidget] and [logOnUpdate] accessors
-/// so the mixin can read/write the widget's data.
 mixin WidgetLogMixin<T extends StatefulWidget> on State<T> {
   AppWidget get logWidget;
   Function(AppWidget) get logOnUpdate;
 
-  /// Append a log entry and return the updated data map.
-  /// Call this inside your action methods, then pass the returned
-  /// data to onUpdate.
   Map<String, dynamic> addLog(Map<String, dynamic> data, String action) {
     final logs = List<Map<String, dynamic>>.from(
       (data['log'] as List?)?.map((e) => Map<String, dynamic>.from(e as Map)).toList() ?? [],
@@ -27,7 +20,6 @@ mixin WidgetLogMixin<T extends StatefulWidget> on State<T> {
     return {...data, 'log': logs};
   }
 
-  /// Show the log dialog for this widget.
   void showLogDialog() {
     final logs = (logWidget.data['log'] as List?)
             ?.map((e) => Map<String, dynamic>.from(e as Map))

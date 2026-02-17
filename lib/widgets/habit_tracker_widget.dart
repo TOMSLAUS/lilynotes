@@ -6,20 +6,6 @@ import 'widget_log_mixin.dart';
 
 const _uuid = Uuid();
 
-/// Habit Tracker Widget
-///
-/// Data schema:
-/// {
-///   'habits': [
-///     {
-///       'id': 'uuid',
-///       'name': 'Exercise',
-///       'color': 0xFFE57373 (int),
-///       'completedDays': ['2026-01-15', '2026-01-16', ...]
-///     },
-///     ...
-///   ]
-/// }
 class HabitTrackerWidget extends StatefulWidget {
   final AppWidget widget;
   final Function(AppWidget) onUpdate;
@@ -179,7 +165,6 @@ class _HabitTrackerWidgetState extends State<HabitTrackerWidget> with WidgetLogM
     final todayStr = _fmt.format(today);
     final habits = _habits;
 
-    // Show last 14 days for a compact grid
     final days = List.generate(14, (i) => today.subtract(Duration(days: 13 - i)));
 
     return Column(
@@ -209,10 +194,9 @@ class _HabitTrackerWidgetState extends State<HabitTrackerWidget> with WidgetLogM
             ),
           )
         else ...[
-          // Day headers row
           Row(
             children: [
-              const SizedBox(width: 100), // habit name column
+              const SizedBox(width: 100),
               ...days.map((day) {
                 final isToday = _fmt.format(day) == todayStr;
                 return Expanded(
@@ -230,7 +214,6 @@ class _HabitTrackerWidgetState extends State<HabitTrackerWidget> with WidgetLogM
               }),
             ],
           ),
-          // Date numbers row
           Row(
             children: [
               const SizedBox(width: 100),
@@ -252,7 +235,6 @@ class _HabitTrackerWidgetState extends State<HabitTrackerWidget> with WidgetLogM
             ],
           ),
           const SizedBox(height: 4),
-          // Habit rows
           ...List.generate(habits.length, (habitIdx) {
             final habit = habits[habitIdx];
             final name = habit['name'] as String? ?? '';
@@ -276,7 +258,6 @@ class _HabitTrackerWidgetState extends State<HabitTrackerWidget> with WidgetLogM
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: Row(
                   children: [
-                    // Habit name + stats
                     GestureDetector(
                       onTap: () => _renameHabit(habitIdx),
                       child: SizedBox(
@@ -304,7 +285,6 @@ class _HabitTrackerWidgetState extends State<HabitTrackerWidget> with WidgetLogM
                         ),
                       ),
                     ),
-                    // Day cells
                     ...List.generate(days.length, (dayIdx) {
                       final dayStr = _fmt.format(days[dayIdx]);
                       final done = completedSet.contains(dayStr);

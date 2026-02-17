@@ -21,7 +21,6 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   Future<void> toggleTheme() async {
-    // Cycle: light → dark → light (skip system to avoid "nothing changed" confusion)
     switch (_themeMode) {
       case ThemeMode.system:
       case ThemeMode.light:

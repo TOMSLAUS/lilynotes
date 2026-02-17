@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // ── Widget type metadata ───────────────────────────────────────────
   static const _widgetTypeInfo = <WidgetType, ({IconData icon, String label})>{
     WidgetType.score: (icon: Icons.poll, label: 'Score'),
     WidgetType.counterList: (icon: Icons.format_list_numbered, label: 'Counter List'),
@@ -43,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  // ── Theme icon helper ──────────────────────────────────────────────
   IconData _themeIcon(ThemeMode mode) {
     switch (mode) {
       case ThemeMode.light:
@@ -55,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // ── Build ──────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -160,7 +157,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── Drawer ─────────────────────────────────────────────────────────
   Widget _buildDrawer(BuildContext context, AppState appState) {
     final pages = appState.pages;
     final theme = Theme.of(context);
@@ -241,7 +237,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── Page context menu (rename / delete) ────────────────────────────
   void _showPageContextMenu(BuildContext context, AppPage page, AppState appState) {
     showModalBottomSheet(
       context: context,
@@ -310,7 +305,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ── New page dialog ────────────────────────────────────────────────
   void _showNewPageDialog(BuildContext context, AppState appState) {
     final navigator = Navigator.of(context);
     showDialog<String>(
@@ -322,13 +316,12 @@ class _HomeScreenState extends State<HomeScreen> {
       if (name != null && name.isNotEmpty) {
         appState.addPage(name);
         if (navigator.canPop()) {
-          navigator.pop(); // close drawer
+          navigator.pop();
         }
       }
     });
   }
 
-  // ── Widget picker bottom sheet ─────────────────────────────────────
   void _showWidgetPicker(BuildContext context) {
     final appState = context.read<AppState>();
     final theme = Theme.of(context);
@@ -391,7 +384,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// ── Stateful dialog widgets (own their TextEditingControllers) ────
 
 class _NewPageDialog extends StatefulWidget {
   const _NewPageDialog();
