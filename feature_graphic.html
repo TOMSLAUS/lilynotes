@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LilyNotes Feature Graphic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            width: 1024px;
+            height: 500px;
+            background: linear-gradient(135deg, #009688 0%, #00796B 50%, #004D40 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image:
+                radial-gradient(circle at 20% 80%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 40% 40%, white 2px, transparent 2px),
+                radial-gradient(circle at 60% 60%, white 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+        .content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            z-index: 1;
+        }
+        .icon-container {
+            width: 180px;
+            height: 180px;
+            background: white;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .icon-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 28px;
+        }
+        .text {
+            color: white;
+            text-align: left;
+        }
+        .title {
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .tagline {
+            font-size: 28px;
+            font-weight: 300;
+            opacity: 0.95;
+            letter-spacing: 1px;
+        }
+        .widgets {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 20px;
+            opacity: 0.9;
+        }
+        .widget-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pattern"></div>
+        <div class="content">
+            <div class="icon-container">
+                <img class="icon-img" src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="LilyNotes">
+            </div>
+            <div class="text">
+                <div class="title">LilyNotes</div>
+                <div class="tagline">Organize your life, your way</div>
+            </div>
+        </div>
+        <div class="widgets">
+            <span class="widget-tag">Checklists</span>
+            <span class="widget-tag">Habits</span>
+            <span class="widget-tag">Progress</span>
+            <span class="widget-tag">Notes</span>
+            <span class="widget-tag">Timers</span>
+        </div>
+    </div>
+</body>
+</html>

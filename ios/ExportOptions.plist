@@ -15,7 +15,7 @@
     <key>provisioningProfiles</key>
     <dict>
         <key>com.lilynotes.app</key>
-        <string>LilyNotes App Store</string>
+        <string>PROFILE_APP_PLACEHOLDER</string>
     </dict>
 </dict>
 </plist>

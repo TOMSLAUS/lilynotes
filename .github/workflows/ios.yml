@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      upload_testflight:
+        description: 'Upload to TestFlight after build'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -19,14 +28,34 @@ jobs:
         with:
           flutter-version-file: pubspec.yaml
           channel: 'stable'
-
-      - name: Install CocoaPods
-        run: |
-          sudo gem install cocoapods
-          cd ios && pod install --repo-update
+          cache: true
 
       - name: Get dependencies
         run: flutter pub get
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: |
+            ios/Pods
+            ~/Library/Caches/CocoaPods
+            ~/.cocoapods
+          key: pods-${{ runner.os }}-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            pods-${{ runner.os }}-
+
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          pod install --repo-update
+
+      - name: Run Flutter analyze
+        run: flutter analyze --no-fatal-infos || echo "Analysis completed with warnings"
+        continue-on-error: true
+
+      - name: Run tests
+        run: flutter test || echo "No tests found or tests failed"
+        continue-on-error: true
 
       - name: Install Apple certificate and provisioning profile
         env:
@@ -35,14 +64,12 @@ jobs:
           PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
           KEYCHAIN_PASSWORD: ${{ github.run_id }}
         run: |
-          # Create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/certificate.p12
-          PROVISIONING_PROFILE_PATH=$RUNNER_TEMP/profile.mobileprovision
+          PP_PATH=$RUNNER_TEMP/profile.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
-          # Decode files from base64
+          # Decode certificate
           echo "$P12_BASE64" | base64 --decode > "$CERTIFICATE_PATH"
-          echo "$PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROVISIONING_PROFILE_PATH"
 
           # Create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
@@ -51,30 +78,69 @@ jobs:
 
           # Import certificate to keychain
           security import "$CERTIFICATE_PATH" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
-          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychain -d user -s "$KEYCHAIN_PATH"
+
+          # Verify certificate was imported
+          echo "Certificates in keychain:"
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
 
           # Install provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp "$PROVISIONING_PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo "$PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PP_PATH"
+          PP_UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(security cms -D -i "$PP_PATH"))
+          cp "$PP_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/${PP_UUID}.mobileprovision
+          echo "Installed profile: $PP_UUID"
 
-      - name: Update ExportOptions.plist with Team ID
+          echo "PP_UUID=$PP_UUID" >> $GITHUB_ENV
+
+      - name: Update ExportOptions.plist
         env:
           TEAM_ID: ${{ secrets.IOS_TEAM_ID }}
         run: |
           sed -i '' "s/TEAM_ID_PLACEHOLDER/$TEAM_ID/g" ios/ExportOptions.plist
+          sed -i '' "s/PROFILE_APP_PLACEHOLDER/$PP_UUID/g" ios/ExportOptions.plist
+
+          echo "ExportOptions.plist contents:"
+          cat ios/ExportOptions.plist
 
       - name: Build release IPA
-        run: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+        run: |
+          flutter build ipa \
+            --release \
+            --build-number=${{ github.run_number }} \
+            --export-options-plist=ios/ExportOptions.plist
 
       - name: Upload IPA artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-ipa
+          name: lilynotes-ios-build-${{ github.run_number }}
           path: build/ios/ipa/*.ipa
           retention-days: 14
+
+      - name: Setup App Store Connect API key
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.upload_testflight == true
+        run: |
+          mkdir -p ~/private_keys
+          echo "${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}" | base64 --decode > ~/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8
+          chmod 600 ~/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8
+
+      - name: Upload to TestFlight
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.upload_testflight == true
+        run: |
+          IPA_FILE=$(find build/ios/ipa -name "*.ipa" -type f | head -1)
+          echo "Uploading IPA: $IPA_FILE"
+
+          xcrun altool --upload-app \
+            --type ios \
+            --file "$IPA_FILE" \
+            --apiKey ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} \
+            --apiIssuer ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }} \
+            --verbose
 
       - name: Clean up keychain
         if: always()
         run: |
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db || true
+          rm -f ~/private_keys/AuthKey_*.p8 || true
