@@ -75,10 +75,20 @@ jobs:
 
           security import "$CERTIFICATE_PATH" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
           security set-key-partition-list -S apple-tool:,apple:,codesign: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security list-keychain -d user -s "$KEYCHAIN_PATH"
+
+          security list-keychain -d user -s "$KEYCHAIN_PATH" $(security list-keychain -d user | tr -d '"' | tr '\n' ' ')
+
+          echo "Keychain search list:"
+          security list-keychain -d user
 
           echo "Certificates in keychain:"
           security find-identity -v -p codesigning "$KEYCHAIN_PATH"
+
+          CERT_COUNT=$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | grep -c "valid identities found" || true)
+          if echo "$CERT_COUNT" | grep -q "0"; then
+            echo "::error::No valid signing identities found in keychain"
+            exit 1
+          fi
 
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           echo "$PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PP_PATH"
