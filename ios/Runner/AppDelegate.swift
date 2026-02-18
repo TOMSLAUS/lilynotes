@@ -1,6 +1,5 @@
 import Flutter
 import UIKit
-import home_widget
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -9,11 +8,6 @@ import home_widget
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
-
-    if #available(iOS 17.0, *) {
-      HomeWidgetPlugin.setGroupId("group.com.lilynotes.app.widgets")
-    }
-
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }

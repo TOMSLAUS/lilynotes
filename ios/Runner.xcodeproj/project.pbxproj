@@ -15,12 +15,6 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		W10001000000000000000001 /* LilyNotesWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = W10002000000000000000001 /* LilyNotesWidgets.swift */; };
-		W10001000000000000000002 /* HabitWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = W10002000000000000000002 /* HabitWidget.swift */; };
-		W10001000000000000000003 /* ProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = W10002000000000000000003 /* ProgressWidget.swift */; };
-		W10001000000000000000004 /* ChecklistWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = W10002000000000000000004 /* ChecklistWidget.swift */; };
-		W10001000000000000000005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = W10002000000000000000005 /* Assets.xcassets */; };
-		W10001000000000000000006 /* LilyNotesWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = W10002000000000000000010 /* LilyNotesWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,13 +24,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
 			remoteInfo = Runner;
-		};
-		W10003000000000000000001 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = W10005000000000000000001;
-			remoteInfo = LilyNotesWidgets;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -49,17 +36,6 @@
 			files = (
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		W10004000000000000000001 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				W10001000000000000000006 /* LilyNotesWidgets.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -81,26 +57,11 @@
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1B2C3D31234567800AABB01 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		W10002000000000000000001 /* LilyNotesWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilyNotesWidgets.swift; sourceTree = "<group>"; };
-		W10002000000000000000002 /* HabitWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidget.swift; sourceTree = "<group>"; };
-		W10002000000000000000003 /* ProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWidget.swift; sourceTree = "<group>"; };
-		W10002000000000000000004 /* ChecklistWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistWidget.swift; sourceTree = "<group>"; };
-		W10002000000000000000005 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		W10002000000000000000006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		W10002000000000000000007 /* LilyNotesWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LilyNotesWidgets.entitlements; sourceTree = "<group>"; };
-		W10002000000000000000010 /* LilyNotesWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LilyNotesWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		W10002000000000000000008 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		97C146EB1CF9000F007C117D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		W10006000000000000000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -136,7 +97,6 @@
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
-				W10007000000000000000001 /* LilyNotesWidgets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,7 +105,6 @@
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
-				W10002000000000000000010 /* LilyNotesWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,20 +124,6 @@
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 			);
 			path = Runner;
-			sourceTree = "<group>";
-		};
-		W10007000000000000000001 /* LilyNotesWidgets */ = {
-			isa = PBXGroup;
-			children = (
-				W10002000000000000000007 /* LilyNotesWidgets.entitlements */,
-				W10002000000000000000001 /* LilyNotesWidgets.swift */,
-				W10002000000000000000002 /* HabitWidget.swift */,
-				W10002000000000000000003 /* ProgressWidget.swift */,
-				W10002000000000000000004 /* ChecklistWidget.swift */,
-				W10002000000000000000005 /* Assets.xcassets */,
-				W10002000000000000000006 /* Info.plist */,
-			);
-			path = LilyNotesWidgets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,34 +156,15 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
-				W10004000000000000000001 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				W10008000000000000000001 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
-		};
-		W10005000000000000000001 /* LilyNotesWidgets */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = W10009000000000000000001 /* Build configuration list for PBXNativeTarget "LilyNotesWidgets" */;
-			buildPhases = (
-				W1000A000000000000000001 /* Sources */,
-				W10006000000000000000001 /* Frameworks */,
-				W1000B000000000000000001 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LilyNotesWidgets;
-			productName = LilyNotesWidgets;
-			productReference = W10002000000000000000010 /* LilyNotesWidgets.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -258,9 +184,6 @@
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
 					};
-					W10005000000000000000001 = {
-						CreatedOnToolsVersion = 15.0;
-					};
 				};
 			};
 			buildConfigurationList = 97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */;
@@ -278,7 +201,6 @@
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
-				W10005000000000000000001 /* LilyNotesWidgets */,
 			);
 		};
 /* End PBXProject section */
@@ -300,14 +222,6 @@
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 				A1B2C3D41234567800AABB01 /* PrivacyInfo.xcprivacy in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		W1000B000000000000000001 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				W10001000000000000000005 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,17 +279,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		W1000A000000000000000001 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				W10001000000000000000001 /* LilyNotesWidgets.swift in Sources */,
-				W10001000000000000000002 /* HabitWidget.swift in Sources */,
-				W10001000000000000000003 /* ProgressWidget.swift in Sources */,
-				W10001000000000000000004 /* ChecklistWidget.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -383,11 +286,6 @@
 			isa = PBXTargetDependency;
 			target = 97C146ED1CF9000F007C117D /* Runner */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
-		};
-		W10008000000000000000001 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = W10005000000000000000001 /* LilyNotesWidgets */;
-			targetProxy = W10003000000000000000001 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -688,92 +586,6 @@
 			};
 			name = Release;
 		};
-		W1000C000000000000000001 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = LilyNotesWidgets/LilyNotesWidgets.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LilyNotesWidgets/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "LilyNotes Widgets";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lilynotes.app.widgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		W1000C000000000000000002 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = LilyNotesWidgets/LilyNotesWidgets.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LilyNotesWidgets/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "LilyNotes Widgets";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lilynotes.app.widgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		W1000C000000000000000003 /* Profile */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = LilyNotesWidgets/LilyNotesWidgets.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LilyNotesWidgets/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "LilyNotes Widgets";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lilynotes.app.widgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Profile;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -803,16 +615,6 @@
 				97C147061CF9000F007C117D /* Debug */,
 				97C147071CF9000F007C117D /* Release */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		W10009000000000000000001 /* Build configuration list for PBXNativeTarget "LilyNotesWidgets" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				W1000C000000000000000001 /* Debug */,
-				W1000C000000000000000002 /* Release */,
-				W1000C000000000000000003 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
