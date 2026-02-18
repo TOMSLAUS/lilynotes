@@ -104,12 +104,9 @@ jobs:
         run: |
           PBXPROJ="ios/Runner.xcodeproj/project.pbxproj"
 
-          sed -i '' 's/"CODE_SIGN_IDENTITY\[sdk=iphoneos\*\]" = "iPhone Developer"/"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution"/g' "$PBXPROJ"
+          sed -i '' 's/iPhone Developer/Apple Distribution/g' "$PBXPROJ"
 
-          sed -i '' '/CODE_SIGN_ENTITLEMENTS = Runner\/Runner.entitlements;/a\
-				CODE_SIGN_STYLE = Manual;\
-				DEVELOPMENT_TEAM = '"$TEAM_ID"';\
-				PROVISIONING_PROFILE_SPECIFIER = "";' "$PBXPROJ"
+          perl -i -pe "s{(CODE_SIGN_ENTITLEMENTS = Runner/Runner\.entitlements;)}{\$1\n\t\t\t\tCODE_SIGN_STYLE = Manual;\n\t\t\t\tDEVELOPMENT_TEAM = $TEAM_ID;}" "$PBXPROJ"
 
           sed -i '' "s/TEAM_ID_PLACEHOLDER/$TEAM_ID/g" ios/ExportOptions.plist
           sed -i '' "s/PROFILE_APP_PLACEHOLDER/$PP_UUID/g" ios/ExportOptions.plist
