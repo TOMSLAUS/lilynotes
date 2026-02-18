@@ -106,7 +106,7 @@ jobs:
 
           sed -i '' 's/iPhone Developer/Apple Distribution/g' "$PBXPROJ"
 
-          perl -i -pe "s{(CODE_SIGN_ENTITLEMENTS = Runner/Runner\.entitlements;)}{\$1\n\t\t\t\tCODE_SIGN_STYLE = Manual;\n\t\t\t\tDEVELOPMENT_TEAM = $TEAM_ID;}" "$PBXPROJ"
+          perl -i -pe "s{(CODE_SIGN_ENTITLEMENTS = Runner/Runner\.entitlements;)}{\$1\n\t\t\t\tCODE_SIGN_STYLE = Manual;\n\t\t\t\tDEVELOPMENT_TEAM = $TEAM_ID;\n\t\t\t\tPROVISIONING_PROFILE = \"$PP_UUID\";\n\t\t\t\tPROVISIONING_PROFILE_SPECIFIER = \"\";}" "$PBXPROJ"
 
           sed -i '' "s/TEAM_ID_PLACEHOLDER/$TEAM_ID/g" ios/ExportOptions.plist
           sed -i '' "s/PROFILE_APP_PLACEHOLDER/$PP_UUID/g" ios/ExportOptions.plist
