@@ -93,7 +93,38 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> with WidgetLogMix
     _confettiOverlay = null;
   }
 
-  void _editTarget() {
+  void _editCurrent() {
+    final controller = TextEditingController(text: _current.toString());
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Set progress'),
+        content: TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          autofocus: true,
+          onSubmitted: (_) {
+            final v = int.tryParse(controller.text);
+            if (v != null && v >= 0) _setCurrent(v);
+            Navigator.pop(ctx);
+          },
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              final v = int.tryParse(controller.text);
+              if (v != null && v >= 0) _setCurrent(v);
+              Navigator.pop(ctx);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+
     final controller = TextEditingController(text: _target.toString());
     showDialog(
       context: context,
@@ -210,9 +241,16 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> with WidgetLogMix
               iconSize: 28,
             ),
             const SizedBox(width: 16),
-            Text(
-              '$_current',
-              style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w700),
+            GestureDetector(
+              onTap: _editCurrent,
+              child: Text(
+                '$_current',
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.dotted,
+                ),
+              ),
             ),
             const SizedBox(width: 16),
             IconButton.outlined(

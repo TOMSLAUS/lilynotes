@@ -59,7 +59,53 @@ class _CounterListWidgetState extends State<CounterListWidget> with WidgetLogMix
     widget.onUpdate(widget.widget.copyWith(title: _titleController.text, data: data));
   }
 
-  void _removeItem(int index) {
+  void _editCount(int index, int currentCount) {
+    final controller = TextEditingController(text: currentCount.toString());
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Set count'),
+        content: TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          autofocus: true,
+          decoration: const InputDecoration(hintText: '0'),
+          onSubmitted: (_) {
+            final v = int.tryParse(controller.text);
+            if (v != null) {
+              final items = _items;
+              final name = items[index]['name'] as String? ?? '';
+              items[index] = {...items[index], 'count': v};
+              var data = {...widget.widget.data, 'items': items};
+              data = addLog(data, '$name: $currentCount → $v');
+              widget.onUpdate(widget.widget.copyWith(title: _titleController.text, data: data));
+            }
+            Navigator.pop(ctx);
+          },
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              final v = int.tryParse(controller.text);
+              if (v != null) {
+                final items = _items;
+                final name = items[index]['name'] as String? ?? '';
+                items[index] = {...items[index], 'count': v};
+                var data = {...widget.widget.data, 'items': items};
+                data = addLog(data, '$name: $currentCount → $v');
+                widget.onUpdate(widget.widget.copyWith(title: _titleController.text, data: data));
+              }
+              Navigator.pop(ctx);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+
     final removed = _items[index]['name'] as String? ?? '';
     final items = _items..removeAt(index);
     var data = {...widget.widget.data, 'items': items};
@@ -134,12 +180,19 @@ class _CounterListWidgetState extends State<CounterListWidget> with WidgetLogMix
                     icon: const Icon(Icons.remove_circle_outline, size: 32),
                     onPressed: () => _changeCount(i, -1),
                   ),
-                  SizedBox(
-                    width: 36,
-                    child: Text(
-                      count.toString(),
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                  GestureDetector(
+                    onTap: () => _editCount(i, count),
+                    child: SizedBox(
+                      width: 36,
+                      child: Text(
+                        count.toString(),
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          decorationStyle: TextDecorationStyle.dotted,
+                        ),
+                      ),
                     ),
                   ),
                   IconButton(

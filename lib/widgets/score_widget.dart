@@ -72,7 +72,53 @@ class _ScoreWidgetState extends State<ScoreWidget> with WidgetLogMixin<ScoreWidg
     widget.onUpdate(widget.widget.copyWith(title: _titleController.text, data: data));
   }
 
-  void _resetVotes() {
+  void _editVotes(int index, int currentVotes) {
+    final controller = TextEditingController(text: currentVotes.toString());
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Set votes'),
+        content: TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          autofocus: true,
+          decoration: const InputDecoration(hintText: '0'),
+          onSubmitted: (_) {
+            final v = int.tryParse(controller.text);
+            if (v != null && v >= 0) {
+              final options = _options;
+              final name = options[index]['text'] as String? ?? '';
+              options[index] = {...options[index], 'votes': v};
+              var data = {...widget.widget.data, 'options': options};
+              data = addLog(data, '$name: $currentVotes → $v');
+              widget.onUpdate(widget.widget.copyWith(title: _titleController.text, data: data));
+            }
+            Navigator.pop(ctx);
+          },
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              final v = int.tryParse(controller.text);
+              if (v != null && v >= 0) {
+                final options = _options;
+                final name = options[index]['text'] as String? ?? '';
+                options[index] = {...options[index], 'votes': v};
+                var data = {...widget.widget.data, 'options': options};
+                data = addLog(data, '$name: $currentVotes → $v');
+                widget.onUpdate(widget.widget.copyWith(title: _titleController.text, data: data));
+              }
+              Navigator.pop(ctx);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+
     final options = _options.map((o) => {...o, 'votes': 0}).toList();
     var data = {...widget.widget.data, 'options': options};
     data = addLog(data, 'votes reset');
@@ -164,12 +210,18 @@ class _ScoreWidgetState extends State<ScoreWidget> with WidgetLogMixin<ScoreWidg
                         icon: const Icon(Icons.remove_circle_outline, size: 32),
                         onPressed: votes > 0 ? () => _changeVotes(i, -1) : null,
                       ),
-                      SizedBox(
-                        width: 32,
-                        child: Text(
-                          votes.toString(),
-                          textAlign: TextAlign.center,
-                          style: theme.textTheme.titleSmall,
+                      GestureDetector(
+                        onTap: () => _editVotes(i, votes),
+                        child: SizedBox(
+                          width: 32,
+                          child: Text(
+                            votes.toString(),
+                            textAlign: TextAlign.center,
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              decoration: TextDecoration.underline,
+                              decorationStyle: TextDecorationStyle.dotted,
+                            ),
+                          ),
                         ),
                       ),
                       IconButton(
