@@ -144,6 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   key: ValueKey(widget.id),
                   widget: widget,
                   isLastTextBlock: widget.type == WidgetType.text && index == widgets.length - 1,
+                  isNew: widget.id == appState.lastAddedWidgetId,
                   onUpdate: (updated) => appState.updateWidget(updated),
                   onDelete: () => appState.deleteWidget(widget.id),
                 );
@@ -307,19 +308,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showNewPageDialog(BuildContext context, AppState appState) {
     final navigator = Navigator.of(context);
-    showDialog<String>(
-      context: context,
-      builder: (ctx) {
-        return const _NewPageDialog();
-      },
-    ).then((name) {
-      if (name != null && name.isNotEmpty) {
-        appState.addPage(name);
-        if (navigator.canPop()) {
-          navigator.pop();
-        }
-      }
-    });
+    appState.addPage('New Page');
+    if (navigator.canPop()) {
+      navigator.pop();
+    }
   }
 
   void _showWidgetPicker(BuildContext context) {
@@ -384,51 +376,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-
-class _NewPageDialog extends StatefulWidget {
-  const _NewPageDialog();
-
-  @override
-  State<_NewPageDialog> createState() => _NewPageDialogState();
-}
-
-class _NewPageDialogState extends State<_NewPageDialog> {
-  final _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _submit() {
-    final name = _controller.text.trim();
-    Navigator.pop(context, name.isEmpty ? null : name);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('New Page'),
-      content: TextField(
-        controller: _controller,
-        autofocus: true,
-        decoration: const InputDecoration(hintText: 'Page name'),
-        onSubmitted: (_) => _submit(),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: _submit,
-          child: const Text('Create'),
-        ),
-      ],
-    );
-  }
-}
 
 class _RenamePageDialog extends StatefulWidget {
   final AppPage page;

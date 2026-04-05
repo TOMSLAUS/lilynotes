@@ -18,6 +18,7 @@ class WidgetCard extends StatelessWidget {
   final Function(AppWidget) onUpdate;
   final VoidCallback onDelete;
   final bool isLastTextBlock;
+  final bool isNew;
 
   const WidgetCard({
     super.key,
@@ -25,6 +26,7 @@ class WidgetCard extends StatelessWidget {
     required this.onUpdate,
     required this.onDelete,
     this.isLastTextBlock = false,
+    this.isNew = false,
   });
 
   @override
@@ -192,21 +194,21 @@ class WidgetCard extends StatelessWidget {
       case WidgetType.divider:
         return const SizedBox.shrink();
       case WidgetType.score:
-        return ScoreWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
+        return ScoreWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete, isNew: isNew);
       case WidgetType.counterList:
-        return CounterListWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
+        return CounterListWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete, isNew: isNew);
       case WidgetType.checklist:
-        return ChecklistWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
+        return ChecklistWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete, isNew: isNew);
       case WidgetType.habitTracker:
-        return HabitTrackerWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
+        return HabitTrackerWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete, isNew: isNew);
       case WidgetType.timer:
         return TimerWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
       case WidgetType.bookmark:
-        return BookmarkWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
+        return BookmarkWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete, isNew: isNew);
       case WidgetType.progressBar:
-        return ProgressBarWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
+        return ProgressBarWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete, isNew: isNew);
       case WidgetType.expenseTracker:
-        return ExpenseTrackerWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete);
+        return ExpenseTrackerWidget(widget: widget, onUpdate: onUpdate, onDelete: onDelete, isNew: isNew);
     }
   }
 }

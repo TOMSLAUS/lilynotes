@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import '../models/app_page.dart';
 import '../models/app_widget.dart';
 import '../models/widget_type.dart';
@@ -21,9 +22,11 @@ class AppState extends ChangeNotifier {
   List<AppPage> _pages = [];
   String? _currentPageId;
   List<AppWidget> _currentWidgets = [];
+  String? _lastAddedWidgetId;
 
   List<AppPage> get pages => List.unmodifiable(_pages);
   String? get currentPageId => _currentPageId;
+  String? get lastAddedWidgetId => _lastAddedWidgetId;
   AppPage? get currentPage =>
       _currentPageId == null ? null : _pages.cast<AppPage?>().firstWhere(
         (p) => p!.id == _currentPageId,
@@ -174,8 +177,11 @@ class AppState extends ChangeNotifier {
 
     final index = _pages.indexWhere((p) => p.id == _currentPageId);
     _pages[index] = updatedPage;
+    _lastAddedWidgetId = widget.id;
     notifyListeners();
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _lastAddedWidgetId = null;
+    });
   }
 
   Future<void> updateWidget(AppWidget widget) async {

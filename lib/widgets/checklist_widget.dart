@@ -9,12 +9,14 @@ class ChecklistWidget extends StatefulWidget {
   final AppWidget widget;
   final Function(AppWidget) onUpdate;
   final VoidCallback onDelete;
+  final bool isNew;
 
   const ChecklistWidget({
     super.key,
     required this.widget,
     required this.onUpdate,
     required this.onDelete,
+    this.isNew = false,
   });
 
   @override
@@ -96,6 +98,7 @@ class _ChecklistWidgetState extends State<ChecklistWidget> with WidgetLogMixin<C
       children: [
         TextField(
           controller: _titleController,
+          autofocus: widget.isNew,
           onChanged: (_) => widget.onUpdate(widget.widget.copyWith(title: _titleController.text)),
           style: theme.textTheme.titleMedium,
           decoration: const InputDecoration(
